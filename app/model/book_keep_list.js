@@ -43,18 +43,28 @@ module.exports = app => {
       type: DataTypes.STRING(260),
       allowNull: false
     },
-    created_at: {
-      type: DataTypes.TIME,
-      allowNull: false,
-      defaultValue: app.Sequelize.literal('CURRENT_TIMESTAMP')
+    created_date: {
+      type: DataTypes.INTEGER(20),
+      allowNull: true,
     },
-    updated_at: {
-      type: DataTypes.TIME,
-      allowNull: false,
-      defaultValue: app.Sequelize.literal('CURRENT_TIMESTAMP')
-    }
+    updated_date: {
+      type: DataTypes.INTEGER(20),
+      allowNull: true,
+    },
   }, {
-    tableName: 'book_keep_list'
+    tableName: 'book_keep_list',
+    timestamps: false,
+    hooks: {  
+      beforeCreate(model, options) {  
+        delete model.dataValues.created_at; // 在创建之前删除 createdAt 字段
+        model.created_date = new Date().getTime();
+      },  
+      beforeUpdate(model, options) {  
+        delete model.dataValues.updated_at;
+        model.updated_date = new Date().getTime();
+        // 如果需要的话，你也可以在这里处理 updatedAt 字段的行为  
+      }  
+    }
   });
 
   Model.associate = function() {

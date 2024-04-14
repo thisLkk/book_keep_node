@@ -1,12 +1,20 @@
 const { Controller } = require('egg');
 
+/**
+ * 获取请求参数
+ * @param {string} uid 
+ * @param {string} date 如：2024-04
+ * @returns 
+ */
 function getListParams(uid, date) {
-  const start_time = new Date(+date);
-  const end_time_number = date + 1 * 24 * 60 * 60 * 1000
-  const end_time = new Date(+end_time_number);
+  const dateArr = date.split('-');
+  const startDate = `${dateArr[0]}-${dateArr[1]} 01 00:00:00`;
+  const nextYear = +dateArr[1] === 12 ? +dateArr[0] + 1 : dateArr[0];
+  const nextMonth = +dateArr[1] === 12 ? 1 : +dateArr[1] + 1;
+  const endDate = `${nextYear}-${nextMonth < 10 ? '0' + nextMonth : nextMonth} 01 00:00:00`;
   return {
-    start_time,
-    end_time,
+    start_time: new Date(startDate).getTime(),
+    end_time: new Date(endDate).getTime(),
     uid,
   }
 }
