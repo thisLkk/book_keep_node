@@ -16,10 +16,6 @@ module.exports = appInfo => {
     username: 'hnunu_test',
     password: 'hnunutest123',
     database: 'hnunu_test',
-    dialectOptions: {  
-      useUTC: true, // 对于某些数据库方言（如 PostgreSQL），设置为 true 使用 UTC  
-      timezone: 'Asia/Shanghai', // 使用 IANA 时区名称  
-    },
   }
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1712759179323_5275';
