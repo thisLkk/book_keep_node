@@ -26,9 +26,9 @@
     "egg-ci": "^1.15.0",
     "egg-mock": "^4.0.0",
     "egg-scripts": "^2.13.0",
+    "egg-sequelize-auto": "^0.1.1",
     "eslint": "^7.1.0",
-    "eslint-config-egg": "^8.0.1",
-    "egg-sequelize-auto": "^0.1.1"
+    "eslint-config-egg": "^8.0.1"
   },
   "engines": {
     "node": ">=10.0.0"
