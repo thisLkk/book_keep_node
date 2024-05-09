@@ -7,7 +7,7 @@ class BookKeepListService extends Service {
     try {
       const result = await model.BookKeepList.findAll({  
         where: {  
-          created_date: {  
+          add_bill_date: {  
             [Op.gte]: params.start_time,  
             [Op.lt]: params.end_time  
           },

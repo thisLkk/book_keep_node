@@ -51,6 +51,10 @@ module.exports = app => {
       type: DataTypes.INTEGER(20),
       allowNull: true,
     },
+    add_bill_date: {
+      type: DataTypes.INTEGER(20),
+      allowNull: true,
+    },
   }, {
     tableName: 'book_keep_list',
     timestamps: false,

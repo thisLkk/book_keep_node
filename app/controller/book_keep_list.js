@@ -54,6 +54,9 @@ class BookKeepListController extends Controller {
         const { is_delete, ...other } = item.dataValues;
         return other;
       });
+      list.sort((a, b) => {
+        return a.add_bill_date - b.add_bill_date;
+      })
       return ctx.success(list);
     }
     return ctx.error('服务处理异常，请稍后重试', -2);
@@ -65,7 +68,10 @@ class BookKeepListController extends Controller {
     if (!uid || !title || !money || !record_type || !record_label) {
       return ctx.error('缺少 uid, title, money, record_type, record_label 必填字段;');
     }
-    const result = await ctx.service.bookKeepList.addInfo(params.request.query);
+    const serviveParams = params.request.query;
+    serviveParams.add_bill_date = new Date(serviveParams.date).getTime();
+    delete serviveParams.date;
+    const result = await ctx.service.bookKeepList.addInfo(serviveParams);
     if (result) {
       return ctx.success();
     }
