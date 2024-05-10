@@ -14,7 +14,7 @@ class BookKeepListService extends Service {
           uid: params.uid
         }  
       });
-      return result.filter(item => !item.is_detele);
+      return result.filter(item => !item.is_delete);
     } catch (e) {
       return null;
     }
