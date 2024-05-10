@@ -77,6 +77,19 @@ class BookKeepListController extends Controller {
     }
     return ctx.error('服务处理异常，请稍后重试', -2);
   }
+  // 删除一条记录
+  async delBill(params) {
+    const { ctx } = this;
+    const { id } = params.request.query;
+    if (!id) {
+      return ctx.error('id参数字段缺失');
+    }
+    const result = await ctx.service.bookKeepList.delOneBill(id);
+    if (result) {
+      return ctx.success();
+    }
+    return ctx.error('服务处理异常，请稍后重试', -2);
+  }
 }
 
 module.exports = BookKeepListController;

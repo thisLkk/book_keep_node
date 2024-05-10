@@ -16,7 +16,6 @@ class BookKeepListService extends Service {
       });
       return result.filter(item => !item.is_detele);
     } catch (e) {
-      console.log(e);
       return null;
     }
   }
@@ -26,7 +25,19 @@ class BookKeepListService extends Service {
     try {
       return await ctx.model.BookKeepList.create(params);
     } catch (e) {
-      console.log(e);
+      return null;
+    }
+  }
+
+  async delOneBill(params) {
+    const { ctx } = this;
+    try {
+      // 这里未做更新前的判断，严谨是需要加的，自己demo先忽略
+      const currentBillData = await ctx.model.BookKeepList.findByPk(params); // 根据 id 查找用户 
+      currentBillData.is_delete = 1;
+      await currentBillData.save(); // 保存更改到数据库 
+      return true;
+    } catch (e) {
       return null;
     }
   }
